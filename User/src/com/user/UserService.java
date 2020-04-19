@@ -34,4 +34,18 @@ public class UserService {
 	public String GetSession(@QueryParam("UserID") int UserID) {
 		return U.GetSession(UserID);
 	}
+	
+	@GET
+	@Path("/GetDoctorEmail")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String GetDoctorEmail(@QueryParam("UserID") int UserID) {
+		return U.GetDoctorEmail(UserID);
+	}
+	
+	@GET
+	@Path("/GetPatientEmail")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String GetDoctorPatientEmail(@QueryParam("UserID") int UserID) {
+		return U.GetPatientEmail(UserID);
+	}
 }

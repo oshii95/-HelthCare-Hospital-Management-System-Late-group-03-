@@ -20,28 +20,28 @@ public class NotificationService {
 	@GET
 	@Path("/CreateAppoinment")
 	@Produces(MediaType.TEXT_HTML)
-	public String CreateAppoinment(@QueryParam("AppoinmentID") int AppoinmentID) {
-		return NOT.CreateAppoinment(AppoinmentID);
+	public String CreateAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("DoctorID") int DoctorID) {
+		return NOT.CreateAppoinment(AppoinmentID, DoctorID);
 	}
 	
 	@GET
 	@Path("/DeleteAppoinment")
 	@Produces(MediaType.TEXT_HTML)
-	public String DeleteAppoinment(@QueryParam("AppoinmentID") int AppoinmentID) {
-		return NOT.DeleteAppoinment(AppoinmentID);
+	public String DeleteAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("UserID") int UserID) {
+		return NOT.DeleteAppoinment(AppoinmentID, UserID);
 	}
 	
 	@GET
 	@Path("/ConfirmAppoinment")
 	@Produces(MediaType.TEXT_HTML)
-	public String ConfirmAppoinment(@QueryParam("AppoinmentID") int AppoinmentID) {
-		return NOT.ConfirmAppoinment(AppoinmentID);
+	public String ConfirmAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("UserID") int UserID) {
+		return NOT.ConfirmAppoinment(AppoinmentID, UserID);
 	}
 	
 	@GET
 	@Path("/RejectAppoinment")
 	@Produces(MediaType.TEXT_HTML)
-	public String RejectAppoinment(@QueryParam("AppoinmentID") int AppoinmentID) {
-		return NOT.RejectAppoinment(AppoinmentID);
+	public String RejectAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("UserID") int UserID) {
+		return NOT.RejectAppoinment(AppoinmentID, UserID);
 	}
 }

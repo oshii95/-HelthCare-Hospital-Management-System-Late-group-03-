@@ -74,4 +74,38 @@ public class User {
 			return "False";
 		}
 	}
+	
+	public String GetDoctorEmail(int UserID) {
+		String Email = "";
+		try {
+			Connection con = connect();
+			Statement stmt = con.createStatement();
+			ResultSet RUser = stmt.executeQuery("SELECT email FROM doctor WHERE d_id = '"+UserID+"'");
+
+			while(RUser.next()) {
+				Email = RUser.getString("email");
+			}
+		} catch(Exception E) {
+			System.out.println(E);
+		}
+		
+		return Email;
+	}
+	
+	public String GetPatientEmail(int UserID) {
+		String Email = "";
+		try {
+			Connection con = connect();
+			Statement stmt = con.createStatement();
+			ResultSet RUser = stmt.executeQuery("SELECT email FROM patient WHERE p_id = '"+UserID+"'");
+
+			while(RUser.next()) {
+				Email = RUser.getString("email");
+			}
+		} catch(Exception E) {
+			System.out.println(E);
+		}
+		
+		return Email;
+	}
 }

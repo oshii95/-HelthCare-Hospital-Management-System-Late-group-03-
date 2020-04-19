@@ -28,7 +28,7 @@ public class Notification {
 		return con;
 	}
 	
-	public String CreateAppoinment(int AppoinmentID) {
+	public String CreateAppoinment(int AppoinmentID, int DoctorID) {
 		String Status = "Pending";
 		try {
 			Connection con = connect();
@@ -38,10 +38,10 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
-		return "Appoinment Created Successfully !";
+		return "Appoinment Created Successfully !\nReciept Sent To "+GetDoctorEmail(DoctorID);
 	}
 	
-	public String DeleteAppoinment(int AppoinmentID) {
+	public String DeleteAppoinment(int AppoinmentID, int UserID) {
 		try {
 			Connection con = connect();
 			Statement stmt = con.createStatement();
@@ -50,23 +50,10 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
-		return "Appoinment Deleted Successfully !";
+		return "Appoinment Deleted Successfully !\nReciept Sent To "+GetPatientEmail(UserID);
 	}
 	
-	public String AcceptAppoinment(int AppoinmentID) {
-		String Status = "Accept";
-		try {
-			Connection con = connect();
-			Statement stmt = con.createStatement();
-			stmt.executeUpdate("INSERT INTO notification(apt_id, status) VALUES ('"+AppoinmentID+"','"+Status+"')");
-
-		} catch(Exception E) {
-			System.out.println(E);
-		}
-		return "Appoinment Accepted Successfully !";
-	}
-	
-	public String ConfirmAppoinment(int AppoinmentID) {
+	public String ConfirmAppoinment(int AppoinmentID, int UserID) {
 		String Status = "Approved";
 		try {
 			Connection con = connect();
@@ -76,10 +63,10 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
-		return "Appoinment Confirmed Successfully !";
+		return "Appoinment Confirmed Successfully !\nReciept Sent To "+GetPatientEmail(UserID);
 	}
 	
-	public String RejectAppoinment(int AppoinmentID) {
+	public String RejectAppoinment(int AppoinmentID, int UserID) {
 		String Status = "Cancelled";
 		try {
 			Connection con = connect();
@@ -89,6 +76,26 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
-		return "Appoinment Cancelled Successfully !";
+		return "Appoinment Cancelled Successfully !\nReciept Sent To "+GetDoctorEmail(UserID);
+	}
+	
+	public String GetDoctorEmail(int UserID) {
+		String text;
+		String url = "http://localhost:8081/User/UserService/User/GetDoctorEmail?UserID="+UserID;
+        Client restClient = Client.create();
+        WebResource webResource = restClient.resource(url);
+        ClientResponse resp = webResource.accept("application/json").get(ClientResponse.class);
+        text = resp.getEntity(String.class);
+        return text;
+	}
+	
+	public String GetPatientEmail(int UserID) {
+		String text;
+		String url = "http://localhost:8081/User/UserService/User/GetPatientEmail?UserID="+UserID;
+        Client restClient = Client.create();
+        WebResource webResource = restClient.resource(url);
+        ClientResponse resp = webResource.accept("application/json").get(ClientResponse.class);
+        text = resp.getEntity(String.class);
+        return text;
 	}
 }

@@ -83,7 +83,7 @@ public class AppoinmentService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String DeleteAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("UserID") int UserID) {
 		if(APP.GetSession(UserID)) {
-			return APP.DeleteAppoinment(AppoinmentID);
+			return APP.DeleteAppoinment(AppoinmentID, UserID);
 		} else {
 			return "Invalid session";
 		}
@@ -95,7 +95,7 @@ public class AppoinmentService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String ConfirmAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("UserID") int UserID) {
 		if(APP.GetSession(UserID)) {
-			return APP.ConfirmAppoinment(AppoinmentID);
+			return APP.ConfirmAppoinment(AppoinmentID, UserID);
 		} else {
 			return "Invalid session";
 		}
@@ -107,7 +107,7 @@ public class AppoinmentService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String RejectAppoinment(@QueryParam("AppoinmentID") int AppoinmentID, @QueryParam("UserID") int UserID) {
 		if(APP.GetSession(UserID)) {
-			return APP.RejectAppoinment(AppoinmentID);
+			return APP.RejectAppoinment(AppoinmentID, UserID);
 		} else {
 			return "Invalid session";
 		}

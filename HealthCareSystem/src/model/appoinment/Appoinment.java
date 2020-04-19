@@ -131,7 +131,7 @@ public class Appoinment {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
-		return UpdateCreateNotification();
+		return UpdateCreateNotification(doctorID);
 	}
 	
 	public int GetLastUpdatedAppoinmentID() {
@@ -150,9 +150,9 @@ public class Appoinment {
 		return AppoinmentID;
 	}
 	
-	public String UpdateCreateNotification() {
+	public String UpdateCreateNotification(int doctorID) {
 		String text = "Innitial";
-		String url = "http://localhost:8081/Notification/NotificationService/Notification/CreateAppoinment?AppoinmentID="+GetLastUpdatedAppoinmentID();
+		String url = "http://localhost:8081/Notification/NotificationService/Notification/CreateAppoinment?AppoinmentID="+GetLastUpdatedAppoinmentID()+"&DoctorID="+doctorID;
         Client restClient = Client.create();
         WebResource webResource = restClient.resource(url);
         ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
@@ -160,10 +160,10 @@ public class Appoinment {
         return text;
 	}
 	
-	public String DeleteNotifiication(int AppoinmentID) {
+	public String DeleteNotifiication(int AppoinmentID, int UserID) {
 		String text = "Innitial";
 
-		String url = "http://localhost:8081/Notification/NotificationService/Notification/DeleteAppoinment?AppoinmentID="+AppoinmentID;
+		String url = "http://localhost:8081/Notification/NotificationService/Notification/DeleteAppoinment?AppoinmentID="+AppoinmentID+"&UserID="+UserID;
         Client restClient = Client.create();
         WebResource webResource = restClient.resource(url);
         ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
@@ -172,7 +172,7 @@ public class Appoinment {
         return text;
 	}
 	
-	public String DeleteAppoinment(int AppoinmentID) {
+	public String DeleteAppoinment(int AppoinmentID, int UserID) {
 		try {
 			Connection con = connect();
 			Statement stmt = con.createStatement();
@@ -181,13 +181,13 @@ public class Appoinment {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
-		return DeleteNotifiication(AppoinmentID);
+		return DeleteNotifiication(AppoinmentID, UserID);
 	}
 	
-	public String ConfirmAppoinment(int AppoinmentID) {
+	public String ConfirmAppoinment(int AppoinmentID, int UserID) {
 		String text = "Innitial";
 
-		String url = "http://localhost:8081/Notification/NotificationService/Notification/ConfirmAppoinment?AppoinmentID="+AppoinmentID;
+		String url = "http://localhost:8081/Notification/NotificationService/Notification/ConfirmAppoinment?AppoinmentID="+AppoinmentID+"&UserID="+UserID;
         Client restClient = Client.create();
         WebResource webResource = restClient.resource(url);
         ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
@@ -196,10 +196,10 @@ public class Appoinment {
         return text;
 	}
 	
-	public String RejectAppoinment(int AppoinmentID) {
+	public String RejectAppoinment(int AppoinmentID, int UserID) {
 		String text = "Innitial";
 
-		String url = "http://localhost:8081/Notification/NotificationService/Notification/RejectAppoinment?AppoinmentID="+AppoinmentID;
+		String url = "http://localhost:8081/Notification/NotificationService/Notification/RejectAppoinment?AppoinmentID="+AppoinmentID+"&UserID="+UserID;
         Client restClient = Client.create();
         WebResource webResource = restClient.resource(url);
         ClientResponse resp = webResource.accept("text/html").get(ClientResponse.class);
