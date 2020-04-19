@@ -38,6 +38,7 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
+		//CALL CREATE PAYMENT FUNCTION WHICH IS TO BE IMPLEMENTED IN PAYMENT SERVICE
 		return "Appoinment Created Successfully !\nReciept Sent To "+GetDoctorEmail(DoctorID);
 	}
 	
@@ -50,6 +51,7 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
+		//CALL DELETE PAYMENT FUNCTION WHICH IS TO BE IMPLEMENTED IN PAYMENT SERVICE
 		return "Appoinment Deleted Successfully !\nReciept Sent To "+GetPatientEmail(UserID);
 	}
 	
@@ -76,6 +78,7 @@ public class Notification {
 		} catch(Exception E) {
 			System.out.println(E);
 		}
+		//CALL DELETE PAYMENT FUNCTION WHICH IS TO BE IMPLEMENTED IN PAYMENT SERVICE
 		return "Appoinment Cancelled Successfully !\nReciept Sent To "+GetDoctorEmail(UserID);
 	}
 	
